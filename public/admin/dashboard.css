@@ -1,0 +1,72 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f4f4;
+}
+
+.layout {
+    display: flex;
+    height: 100vh;
+}
+
+/* MENU LATERAL */
+.sidebar {
+    width: 240px;
+    background: #111827;
+    color: white;
+    padding: 20px;
+}
+
+.sidebar h2 {
+    margin-top: 0;
+    font-size: 22px;
+    text-align: center;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar li {
+    padding: 12px;
+    margin: 6px 0;
+    background: #1f2937;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.sidebar li:hover {
+    background: #374151;
+}
+
+/* ÁREA PRINCIPAL */
+.content {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+#modulo-container {
+    margin-top: 20px;
+}
+
+/* TABELAS */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+table th, table td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+}
+
+table th {
+    background: #f0f0f0;
+    text-align: left;
+}

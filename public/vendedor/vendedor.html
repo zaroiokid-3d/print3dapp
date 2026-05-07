@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>ZaroioKID 3D — Vendedor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="vendedor.css">
+</head>
+<body>
+
+<div id="app">
+
+  <!-- LOGIN -->
+  <section id="login-section">
+    <h1>ZaroioKID 3D</h1>
+    <h2>Área do Vendedor</h2>
+    <input id="email" type="email" placeholder="Seu e-mail">
+    <input id="password" type="password" placeholder="Sua senha">
+    <button id="btn-login">Entrar</button>
+    <p id="login-msg"></p>
+  </section>
+
+  <!-- APP -->
+  <section id="app-section" class="hidden">
+    <header>
+      <h1 id="vendedor-nome">Olá, vendedor</h1>
+      <button id="btn-logout">Sair</button>
+    </header>
+
+    <nav class="tabs">
+      <button data-tab="lojas" class="active">Minhas Lojas</button>
+      <button data-tab="vendas">Registrar Venda</button>
+      <button data-tab="pedidos">Pedidos de Impressão</button>
+      <button data-tab="comissoes">Minhas Comissões</button>
+    </nav>
+
+    <main>
+      <section id="tab-lojas" class="tab active">
+        <h2>Minhas Lojas</h2>
+        <div id="lista-lojas"></div>
+      </section>
+
+      <section id="tab-vendas" class="tab">
+        <h2>Registrar Venda</h2>
+        <select id="venda-loja"></select>
+        <select id="venda-produto"></select>
+        <input id="venda-quantidade" type="number" min="1" value="1">
+        <input id="venda-valor" type="number" step="0.01" placeholder="Valor total">
+        <button id="btn-salvar-venda">Salvar Venda</button>
+        <p id="venda-msg"></p>
+      </section>
+
+      <section id="tab-pedidos" class="tab">
+        <h2>Pedido de Impressão</h2>
+        <select id="pedido-loja"></select>
+        <select id="pedido-produto"></select>
+        <input id="pedido-quantidade" type="number" min="1" value="1">
+        <button id="btn-salvar-pedido">Solicitar Impressão</button>
+        <p id="pedido-msg"></p>
+      </section>
+
+      <section id="tab-comissoes" class="tab">
+        <h2>Minhas Comissões</h2>
+        <div id="lista-comissoes"></div>
+      </section>
+    </main>
+  </section>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+<script src="/supabaseClient.js"></script>
+<script src="vendedor.js"></script>
+
+</body>
+</html>

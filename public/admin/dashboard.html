@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>ZaroioKID 3D — Painel Admin</title>
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+
+<body>
+
+<div class="layout">
+
+    <!-- MENU LATERAL -->
+    <aside class="sidebar">
+        <h2>ZaroioKID 3D</h2>
+
+        <nav>
+            <ul>
+                <li data-module="producao">Produção</li>
+                <li data-module="estoque">Estoque Central</li>
+                <li data-module="consignacao">Consignação</li>
+                <li data-module="vendas">Vendas</li>
+                <li data-module="vendedores">Vendedores</li>
+                <li data-module="lojas">Lojas</li>
+                <li data-module="catalogo">Catálogo</li>
+                <li data-module="filamentos">Filamentos</li>
+                <li data-module="insumos">Insumos</li>
+                <li data-module="comissoes">Comissões</li>
+                <li data-module="config">Configurações</li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- ÁREA PRINCIPAL -->
+    <main class="content">
+        <h1 id="titulo-modulo">Selecione um módulo</h1>
+        <div id="modulo-container"></div>
+    </main>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+<script src="/supabaseClient.js"></script>
+<script src="dashboard.js"></script>
+
+
+</body>
+</html>

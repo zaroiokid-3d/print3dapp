@@ -1,0 +1,106 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f4f4;
+}
+
+#app {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.hidden {
+  display: none;
+}
+
+#login-section {
+  text-align: center;
+  margin-top: 60px;
+}
+
+#login-section input {
+  width: 100%;
+  padding: 10px;
+  margin: 6px 0;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+#login-section button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  background: #111827;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header button {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: none;
+  background: #dc2626;
+  color: white;
+  cursor: pointer;
+}
+
+.tabs {
+  display: flex;
+  margin-top: 16px;
+  gap: 4px;
+}
+
+.tabs button {
+  flex: 1;
+  padding: 8px;
+  border: none;
+  border-radius: 6px;
+  background: #e5e7eb;
+  cursor: pointer;
+}
+
+.tabs button.active {
+  background: #111827;
+  color: white;
+}
+
+.tab {
+  margin-top: 16px;
+}
+
+select, input {
+  width: 100%;
+  padding: 8px;
+  margin: 6px 0;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+button {
+  background: #111827;
+  color: white;
+}
+
+#lista-lojas, #lista-comissoes {
+  background: white;
+  border-radius: 6px;
+  padding: 10px;
+}
+
+.card {
+  border-bottom: 1px solid #eee;
+  padding: 8px 0;
+}
+
+.card:last-child {
+  border-bottom: none;
+}

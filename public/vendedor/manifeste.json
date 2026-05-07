@@ -1,0 +1,9 @@
+{
+  "name": "ZaroioKID 3D - Vendedor",
+  "short_name": "ZaroioKID",
+  "start_url": "vendedor.html",
+  "display": "standalone",
+  "background_color": "#111827",
+  "theme_color": "#111827",
+  "icons": []
+}
