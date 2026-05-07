@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <title>ZaroioKID 3D — Painel Admin</title>
     <link rel="stylesheet" href="dashboard.css">
+
+    <!-- 🔐 Segurança: Supabase + Proteção de rota -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <script src="../supabaseClient.js"></script>
+    <script src="protect.js"></script>
 </head>
 
 <body>
@@ -33,16 +38,36 @@
 
     <!-- ÁREA PRINCIPAL -->
     <main class="content">
+
+        <!-- TOPBAR COM AVATAR + DROPDOWN -->
+        <header class="topbar">
+            <div class="topbar-left">
+                <span id="topbar-username">Carregando...</span>
+            </div>
+
+            <div class="topbar-right">
+                <div class="user-menu">
+                    <img id="topbar-avatar" class="avatar" src="../assets/avatar-default.png" alt="avatar">
+
+                    <div id="dropdown-menu" class="dropdown hidden">
+                        <div class="dropdown-item" id="menu-perfil">Meu Perfil</div>
+                        <div class="dropdown-item" id="menu-config">Configurações</div>
+                        <div class="dropdown-divider"></div>
+                        <div class="dropdown-item logout" id="menu-logout">Sair</div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
         <h1 id="titulo-modulo">Selecione um módulo</h1>
-        <div id="modulo-container"></div>
+        <div id="modulo-container" class="card"></div>
+
     </main>
 
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-<script src="/supabaseClient.js"></script>
+<!-- 🔧 Scripts da página -->
 <script src="dashboard.js"></script>
-
 
 </body>
 </html>

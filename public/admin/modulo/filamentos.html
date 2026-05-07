@@ -1,0 +1,62 @@
+<h2>Filamentos</h2>
+
+<div class="filamentos-container">
+
+    <h3>Cadastrar Novo Filamento</h3>
+
+    <div class="form-bloco">
+        <label>Material</label>
+        <input type="text" id="material">
+
+        <label>Cor</label>
+        <input type="text" id="cor">
+
+        <label>Peso Total (g)</label>
+        <input type="number" id="pesoTotal" step="0.01">
+
+        <button id="btnCadastrar">Cadastrar</button>
+    </div>
+
+    <h3>Lista de Filamentos</h3>
+
+    <table id="tabelaFilamentos">
+        <thead>
+            <tr>
+                <th>Material</th>
+                <th>Cor</th>
+                <th>Peso Total</th>
+                <th>Peso Restante</th>
+                <th>Status</th>
+                <th>Ajustar</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <!-- Modal de ajuste -->
+    <div id="ajusteModal" class="modal hidden">
+        <div class="modal-content">
+            <h3>Ajustar Filamento</h3>
+
+            <p id="filamentoNome"></p>
+
+            <label>Quantidade (g)</label>
+            <input type="number" id="ajusteQtd" step="0.01">
+
+            <label>Tipo</label>
+            <select id="ajusteTipo">
+                <option value="entrada">Entrada</option>
+                <option value="saida">Saída</option>
+            </select>
+
+            <label>Motivo</label>
+            <input type="text" id="ajusteMotivo">
+
+            <button id="confirmarAjuste">Confirmar</button>
+            <button onclick="fecharModal()">Cancelar</button>
+        </div>
+    </div>
+
+</div>
+
+<script src="filamentos.js"></script>

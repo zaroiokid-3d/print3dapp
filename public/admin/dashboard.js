@@ -163,3 +163,25 @@ function renderTabela(data, colunas) {
 
     document.getElementById("modulo-container").innerHTML = html;
 }
+
+case "vendedores":
+    carregarModulo("modulos/vendedores.html");
+    break;
+case "comissoes":
+    carregarModulo("modulos/comissoes.html");
+    break;
+case "lojas":
+    carregarModulo("modulos/lojas.html");
+    break;
+case "catalogo":
+    carregarModulo("modulos/catalogo.html");
+    break;
+case "insumos":
+    carregarModulo("modulos/insumos.html");
+    break;
+case "filamentos":
+    carregarModulo("modulos/filamentos.html");
+    break;
+case "config":
+    carregarModulo("modulos/configuracoes.html");
+    break;
