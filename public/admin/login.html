@@ -1,12 +1,70 @@
 <!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Login — Painel Admin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<form id="loginForm">
-  <input type="email" id="email" placeholder="E-mail" required>
-  <input type="password" id="password" placeholder="Senha" required>
-  <button type="submit">Entrar</button>
-</form>
+  <style>
+    body {
+      background: #0f172a;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-<script src="../supabaseClient.js"></script>
-<script src="login.js"></script>
+    #loginForm {
+      background: rgba(255, 255, 255, 0.08);
+      padding: 30px;
+      border-radius: 12px;
+      width: 300px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
 
+    input {
+      padding: 12px;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+      font-size: 15px;
+    }
+
+    button {
+      padding: 12px;
+      background: #38bdf8;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      background: #0ea5e9;
+    }
+  </style>
+</head>
+
+<body>
+
+  <form id="loginForm">
+    <input type="email" id="email" placeholder="E-mail" required>
+    <input type="password" id="password" placeholder="Senha" required>
+    <button type="submit">Entrar</button>
+  </form>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script src="../supabaseClient.js"></script>
+  <script src="login.js"></script>
+
+</body>
+</html>
