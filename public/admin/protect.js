@@ -1,19 +1,14 @@
-// ===============================
-// PROTEÇÃO DO PAINEL ADMIN
-// ===============================
-
 async function protectAdmin() {
-    // Recupera sessão salva localmente
+    // Recupera sessão local
     const localSession = JSON.parse(localStorage.getItem("adminSession"));
 
-    // Se não houver sessão local → volta para login
     if (!localSession) {
         window.location.href = "login.html";
         return;
     }
 
-    // Confirma sessão válida com Supabase
-    const { data, error } = await supabase.auth.getSession();
+    // Valida sessão com Supabase
+    const { data } = await supabase.auth.getSession();
 
     if (!data.session) {
         localStorage.removeItem("adminSession");
@@ -23,50 +18,17 @@ async function protectAdmin() {
 
     const user = data.session.user;
 
-    // ===============================
-    // 🔐 REGRA TEMPORÁRIA DE ADMIN
-    // Somente este e-mail pode acessar o painel
-    // ===============================
+    // Admin permitido
     const adminEmail = "cesmenezes1683@gmail.com";
 
-    if (user.email !== adminEmail) {
-        // Se não for admin, bloqueia acesso
+    if (user.email.toLowerCase().trim() !== adminEmail.toLowerCase().trim()) {
+        localStorage.removeItem("adminSession");
         window.location.href = "login.html";
         return;
     }
 
-    // Atualiza sessão local (garante dados atualizados)
+    // Atualiza sessão local
     localStorage.setItem("adminSession", JSON.stringify(data.session));
 }
 
 protectAdmin();
-
-
-// ===============================
-// TOPBAR: Nome e Avatar
-// ===============================
-
-const adminSession = JSON.parse(localStorage.getItem("adminSession"));
-
-if (adminSession) {
-    const nome = adminSession.user.email; // Sem metadata por enquanto
-    document.getElementById("topbar-username").innerText = "Olá, " + nome;
-
-    // Avatar padrão (metadata será implementado depois)
-    const avatarUrl = adminSession.user.user_metadata?.avatar_url;
-    if (avatarUrl) {
-        document.getElementById("topbar-avatar").src = avatarUrl;
-    }
-}
-
-
-// ===============================
-// LOGOUT
-// ===============================
-
-document.getElementById("menu-logout")?.addEventListener("click", async () => {
-    await supabase.auth.signOut();
-    localStorage.removeItem("adminSession");
-    window.location.href = "login.html";
-});
-
