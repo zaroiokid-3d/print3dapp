@@ -5,16 +5,10 @@
     <title>ZaroioKID 3D — Painel Admin</title>
     <link rel="stylesheet" href="dashboard.css">
 
-    <!-- SUPABASE VIA ESM -->
-    <script type="module">
-      import { createClient } from "https://esm.sh/@supabase/supabase-js";
-
-      window.supabase = createClient(
-        "https://ublelxdzwhgpblnfqlic.supabase.co",
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVibGVseGR6d2hncGJsbmZxbGljIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgxMDM4MTcsImV4cCI6MjA5MzY3OTgxN30.kbJkKgDEQKXcTGrgsBuf7shGlBYLgCssHc-vgmhQbAg"
-      );
-    </script>
+    <!-- SUPABASE GLOBAL VIA ESM -->
     <script type="module" src="../supabaseClient.js"></script>
+
+    <!-- PROTEÇÃO DE ACESSO -->
     <script src="protect.js"></script>
 </head>
 
@@ -67,6 +61,7 @@
 
 </div>
 
+<!-- LÓGICA DO DASHBOARD -->
 <script src="dashboard.js"></script>
 
 </body>
