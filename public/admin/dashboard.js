@@ -43,6 +43,9 @@ async function carregarModulo(modulo) {
         case "comissoes":
             return carregarComissoes();
 
+        case "config":
+            return carregarConfiguracoes();
+
         default:
             document.getElementById("modulo-container").innerHTML = "<p>Módulo não encontrado.</p>";
     }
@@ -132,6 +135,10 @@ async function carregarComissoes() {
     renderTabela(data, ["id", "vendedores.nome", "vendas_externas.valor_total", "valor_comissao", "status_pagamento"]);
 }
 
+async function carregarConfiguracoes() {
+    document.getElementById("modulo-container").innerHTML = "<p>Configurações em desenvolvimento.</p>";
+}
+
 // ===============================
 // RENDERIZAÇÃO DE TABELA
 // ===============================
@@ -163,25 +170,3 @@ function renderTabela(data, colunas) {
 
     document.getElementById("modulo-container").innerHTML = html;
 }
-
-case "vendedores":
-    carregarModulo("modulos/vendedores.html");
-    break;
-case "comissoes":
-    carregarModulo("modulos/comissoes.html");
-    break;
-case "lojas":
-    carregarModulo("modulos/lojas.html");
-    break;
-case "catalogo":
-    carregarModulo("modulos/catalogo.html");
-    break;
-case "insumos":
-    carregarModulo("modulos/insumos.html");
-    break;
-case "filamentos":
-    carregarModulo("modulos/filamentos.html");
-    break;
-case "config":
-    carregarModulo("modulos/configuracoes.html");
-    break;
