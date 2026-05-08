@@ -8,6 +8,10 @@ document.querySelectorAll(".sidebar li").forEach(item => {
     });
 });
 
+document.addEventListener("DOMContentLoaded", () => {
+    // todo o código existente do dashboard.js aqui dentro
+});
+
 async function carregarModulo(modulo) {
     document.getElementById("titulo-modulo").innerText = modulo.toUpperCase();
 

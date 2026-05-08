@@ -5,11 +5,12 @@
     <title>ZaroioKID 3D — Painel Admin</title>
     <link rel="stylesheet" href="dashboard.css">
 
-    <!-- SUPABASE GLOBAL VIA ESM -->
-    <script type="module" src="../supabaseClient.js"></script>
+    <!-- 1. Supabase global -->
+<script type="module" src="../supabaseClient.js"></script>
 
-    <!-- PROTEÇÃO DE ACESSO -->
-    <script src="protect.js"></script>
+<!-- 2. Proteção de acesso (depende do Supabase) -->
+<script defer src="protect.js"></script>
+
 </head>
 
 <body>
@@ -62,7 +63,9 @@
 </div>
 
 <!-- LÓGICA DO DASHBOARD -->
-<script src="dashboard.js"></script>
+<!-- 3. Dashboard (depende do DOM e do Supabase) -->
+<script defer src="dashboard.js"></script>
+
 
 </body>
 </html>

@@ -1,5 +1,11 @@
+// protect.js — versão corrigida
+
 async function protectAdmin() {
-    // Recupera sessão local
+    // Aguarda Supabase carregar
+    if (!window.supabase) {
+        await new Promise(resolve => setTimeout(resolve, 50));
+    }
+
     const localSession = JSON.parse(localStorage.getItem("adminSession"));
 
     if (!localSession) {
@@ -7,7 +13,6 @@ async function protectAdmin() {
         return;
     }
 
-    // Valida sessão com Supabase
     const { data } = await supabase.auth.getSession();
 
     if (!data.session) {
@@ -17,8 +22,6 @@ async function protectAdmin() {
     }
 
     const user = data.session.user;
-
-    // Admin permitido
     const adminEmail = "cesmenezes1683@gmail.com";
 
     if (user.email.toLowerCase().trim() !== adminEmail.toLowerCase().trim()) {
@@ -27,7 +30,6 @@ async function protectAdmin() {
         return;
     }
 
-    // Atualiza sessão local
     localStorage.setItem("adminSession", JSON.stringify(data.session));
 }
 
