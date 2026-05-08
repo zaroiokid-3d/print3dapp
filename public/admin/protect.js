@@ -1,9 +1,9 @@
-// protect.js — versão corrigida
+// protect.js
 
 async function protectAdmin() {
-    // Aguarda Supabase carregar
+    // garante que supabase já existe
     if (!window.supabase) {
-        await new Promise(resolve => setTimeout(resolve, 50));
+        await new Promise(r => setTimeout(r, 50));
     }
 
     const localSession = JSON.parse(localStorage.getItem("adminSession"));
@@ -13,9 +13,9 @@ async function protectAdmin() {
         return;
     }
 
-    const { data } = await supabase.auth.getSession();
+    const { data, error } = await supabase.auth.getSession();
 
-    if (!data.session) {
+    if (error || !data.session) {
         localStorage.removeItem("adminSession");
         window.location.href = "login.html";
         return;
