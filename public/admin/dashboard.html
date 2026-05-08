@@ -5,17 +5,25 @@
     <title>ZaroioKID 3D — Painel Admin</title>
     <link rel="stylesheet" href="dashboard.css">
 
-    
+    <!-- SUPABASE VIA ESM -->
+    <script type="module">
+      import { createClient } from "https://esm.sh/@supabase/supabase-js";
+
+      window.supabase = createClient(
+        "https://ublelxdzwhgpblnfqlic.supabase.co",
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVibGVseGR6d2hncGJsbmZxbGljIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgxMDM4MTcsImV4cCI6MjA5MzY3OTgxN30.kbJkKgDEQKXcTGrgsBuf7shGlBYLgCssHc-vgmhQbAg"
+      );
+    </script>
+
+    <script src="protect.js"></script>
 </head>
 
 <body>
 
 <div class="layout">
 
-    <!-- MENU LATERAL -->
     <aside class="sidebar">
         <h2>ZaroioKID 3D</h2>
-
         <nav>
             <ul>
                 <li data-module="producao">Produção</li>
@@ -33,10 +41,7 @@
         </nav>
     </aside>
 
-    <!-- ÁREA PRINCIPAL -->
     <main class="content">
-
-        <!-- TOPBAR COM AVATAR + DROPDOWN -->
         <header class="topbar">
             <div class="topbar-left">
                 <span id="topbar-username">Carregando...</span>
@@ -58,13 +63,10 @@
 
         <h1 id="titulo-modulo">Selecione um módulo</h1>
         <div id="modulo-container" class="card"></div>
-
     </main>
 
 </div>
 
-<!-- 🔧 Scripts da página -->
-<script src="protect.js"></script>
 <script src="dashboard.js"></script>
 
 </body>
