@@ -6,6 +6,27 @@ document.addEventListener("DOMContentLoaded", () => {
     const tituloModulo = document.getElementById("titulo-modulo");
     const container = document.getElementById("modulo-container");
 
+// ===============================
+// TEMA CLARO/ESCURO
+// ===============================
+const themeBtn = document.getElementById("toggle-theme");
+
+function aplicarTema() {
+    const tema = localStorage.getItem("tema") || "dark";
+    document.body.classList.toggle("light", tema === "light");
+    themeBtn.textContent = tema === "light" ? "🌙" : "☀️";
+}
+
+themeBtn.addEventListener("click", () => {
+    const atual = localStorage.getItem("tema") || "dark";
+    const novo = atual === "dark" ? "light" : "dark";
+    localStorage.setItem("tema", novo);
+    aplicarTema();
+});
+
+aplicarTema();
+
+
     // ===============================
     // TOPO: usuário e menu
     // ===============================

@@ -1,94 +1,118 @@
-let insumoSelecionado = null;
-
-// Cadastrar insumo
-document.getElementById("btnCadastrar").addEventListener("click", async () => {
-    const nome = document.getElementById("nome").value;
-    const categoria = document.getElementById("categoria").value;
-    const unidade = document.getElementById("unidade").value;
-
-    if (!nome || !categoria || !unidade) {
-        alert("Preencha todos os campos");
-        return;
+// ===============================
+// CARREGAR USUÁRIO NO TOPO
+// ===============================
+async function carregarUsuario() {
+    const { data } = await supabase.auth.getUser();
+    if (data?.user) {
+        document.getElementById("topbar-username").innerText = data.user.email;
     }
+}
+carregarUsuario();
 
-    const { error } = await supabase.from("insumos").insert({
-        nome,
-        categoria,
-        unidade,
-        ativo: true
-    });
-
-    if (error) {
-        alert("Erro ao cadastrar insumo");
-        return;
-    }
-
-    alert("Insumo cadastrado!");
-    carregarInsumos();
+// ===============================
+// BOTÃO DE SAIR
+// ===============================
+document.getElementById("menu-logout").addEventListener("click", async () => {
+    await supabase.auth.signOut();
+    localStorage.removeItem("adminSession");
+    window.location.href = "../login.html";
 });
 
-// Carregar lista de insumos
+// ===============================
+// TEMA CLARO/ESCURO
+// ===============================
+const themeBtn = document.getElementById("toggle-theme");
+
+function aplicarTema() {
+    const tema = localStorage.getItem("tema") || "dark";
+    document.body.classList.toggle("light", tema === "light");
+    themeBtn.textContent = tema === "light" ? "🌙" : "☀️";
+}
+
+themeBtn.addEventListener("click", () => {
+    const atual = localStorage.getItem("tema") || "dark";
+    const novo = atual === "dark" ? "light" : "dark";
+    localStorage.setItem("tema", novo);
+    aplicarTema();
+});
+
+aplicarTema();
+
+// ===============================
+// CADASTRAR INSUMO
+// ===============================
+document.getElementById("btnCadastrar").addEventListener("click", async () => {
+
+    const nome = document.getElementById("nome").value.trim();
+    const categoria = document.getElementById("categoria").value.trim();
+    const quantidade_total = Number(document.getElementById("quantidade_total").value);
+    const preco_total = Number(document.getElementById("preco_total").value);
+    const frete = Number(document.getElementById("frete").value || 0);
+    const juros = Number(document.getElementById("juros").value || 0);
+
+    if (!nome || !quantidade_total || !preco_total) {
+        alert("Preencha os campos obrigatórios.");
+        return;
+    }
+
+    const custo_final = preco_total + frete + juros;
+    const custo_unitario = custo_final / quantidade_total;
+
+    const payload = {
+        nome,
+        categoria,
+        quantidade_total,
+        preco_total,
+        frete,
+        juros,
+        custo_unitario
+    };
+
+    const { error } = await supabase.from("insumos").insert([payload]);
+
+    if (error) {
+        console.error(error);
+        alert("Erro ao salvar insumo: " + error.message);
+    } else {
+        alert("Insumo cadastrado com sucesso!");
+        carregarInsumos();
+    }
+});
+
+// ===============================
+// LISTAR INSUMOS
+// ===============================
 async function carregarInsumos() {
-    const { data } = await supabase.from("insumos").select("*");
+    const tabela = document.querySelector("#tabelaInsumos tbody");
+    tabela.innerHTML = "<tr><td colspan='7'>Carregando...</td></tr>";
 
-    const tbody = document.querySelector("#tabelaInsumos tbody");
-    tbody.innerHTML = "";
+    const { data, error } = await supabase.from("insumos").select("*");
 
-    data.forEach(i => {
-        tbody.innerHTML += `
+    if (error) {
+        tabela.innerHTML = "<tr><td colspan='7'>Erro ao carregar.</td></tr>";
+        return;
+    }
+
+    if (!data || data.length === 0) {
+        tabela.innerHTML = "<tr><td colspan='7'>Nenhum registro encontrado.</td></tr>";
+        return;
+    }
+
+    tabela.innerHTML = "";
+
+    data.forEach(insumo => {
+        tabela.innerHTML += `
             <tr>
-                <td>${i.nome}</td>
-                <td>${i.categoria}</td>
-                <td>${i.quantidade}</td>
-                <td>${i.unidade}</td>
-                <td>${i.ativo ? "Ativo" : "Inativo"}</td>
-                <td>
-                    <button onclick="abrirModal('${i.id}', '${i.nome}')">Ajustar</button>
-                </td>
+                <td>${insumo.nome}</td>
+                <td>${insumo.categoria || "-"}</td>
+                <td>${insumo.quantidade_total}</td>
+                <td>R$ ${insumo.preco_total.toFixed(2)}</td>
+                <td>R$ ${insumo.frete.toFixed(2)}</td>
+                <td>R$ ${insumo.juros.toFixed(2)}</td>
+                <td>R$ ${insumo.custo_unitario.toFixed(4)}</td>
             </tr>
         `;
     });
 }
-
-// Abrir modal
-function abrirModal(id, nome) {
-    insumoSelecionado = id;
-    document.getElementById("insumoNome").innerText = nome;
-    document.getElementById("ajusteModal").classList.remove("hidden");
-}
-
-// Fechar modal
-function fecharModal() {
-    document.getElementById("ajusteModal").classList.add("hidden");
-}
-
-// Confirmar ajuste
-document.getElementById("confirmarAjuste").addEventListener("click", async () => {
-    const qtd = parseFloat(document.getElementById("ajusteQtd").value);
-    const tipo = document.getElementById("ajusteTipo").value;
-    const motivo = document.getElementById("ajusteMotivo").value;
-
-    if (!qtd || qtd <= 0) return alert("Quantidade inválida");
-
-    const operador = tipo === "entrada" ? qtd : -qtd;
-
-    // Atualizar quantidade
-    await supabase.rpc("ajustar_insumo", {
-        insumo_id: insumoSelecionado,
-        qtd: operador
-    });
-
-    // Registrar movimentação
-    await supabase.from("movimentacoes_insumos").insert({
-        insumo_id: insumoSelecionado,
-        tipo,
-        quantidade: qtd,
-        motivo
-    });
-
-    fecharModal();
-    carregarInsumos();
-    alert("Ajuste realizado!");
-});
 
 carregarInsumos();

@@ -1,7 +1,4 @@
-// protect.js
-
 async function protectAdmin() {
-    // garante que supabase já existe
     if (!window.supabase) {
         await new Promise(r => setTimeout(r, 50));
     }
@@ -9,7 +6,7 @@ async function protectAdmin() {
     const localSession = JSON.parse(localStorage.getItem("adminSession"));
 
     if (!localSession) {
-        window.location.href = "login.html";
+        window.location.href = "../login.html";
         return;
     }
 
@@ -17,7 +14,7 @@ async function protectAdmin() {
 
     if (error || !data.session) {
         localStorage.removeItem("adminSession");
-        window.location.href = "login.html";
+        window.location.href = "../login.html";
         return;
     }
 
@@ -26,7 +23,7 @@ async function protectAdmin() {
 
     if (user.email.toLowerCase().trim() !== adminEmail.toLowerCase().trim()) {
         localStorage.removeItem("adminSession");
-        window.location.href = "login.html";
+        window.location.href = "../login.html";
         return;
     }
 

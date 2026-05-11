@@ -5,11 +5,14 @@
     <title>ZaroioKID 3D — Painel Admin</title>
     <link rel="stylesheet" href="dashboard.css">
 
-    <!-- Supabase global -->
+    <!-- 1. Supabase global -->
     <script type="module" src="../supabaseClient.js"></script>
 
-    <!-- Proteção de acesso -->
+    <!-- 2. Proteção de acesso -->
     <script defer src="protect.js"></script>
+
+    <!-- 3. Lógica do dashboard -->
+    <script defer src="dashboard.js"></script>
 </head>
 
 <body>
@@ -38,6 +41,7 @@
     <main class="content">
         <header class="topbar">
             <div class="topbar-left">
+                <button id="toggle-theme" class="theme-btn">🌙</button>
                 <span id="topbar-username">Carregando...</span>
             </div>
 
@@ -60,8 +64,6 @@
     </main>
 
 </div>
-
-<script defer src="dashboard.js"></script>
 
 </body>
 </html>

@@ -238,3 +238,32 @@ tr:hover {
     padding-left: 0;
   }
 }
+
+:root {
+  --bg: #0f172a;
+  --text: #e2e8f0;
+  --card: #1e293b;
+}
+
+.light {
+  --bg: #f1f5f9;
+  --text: #0f172a;
+  --card: #ffffff;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+.card {
+  background: var(--card);
+}
+
+.theme-btn {
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: var(--text);
+}

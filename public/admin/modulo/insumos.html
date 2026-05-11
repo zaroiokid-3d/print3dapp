@@ -1,62 +1,118 @@
-<h2>Insumos</h2>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Insumos — ZarioKID 3D</title>
+    <link rel="stylesheet" href="dashboard.css">
 
-<div class="insumos-container">
+    <!-- Supabase -->
+    <script type="module" src="../../supabaseClient.js"></script>
 
-    <h3>Cadastrar Novo Insumo</h3>
+    <!-- Proteção -->
+    <script defer src="protect.js"></script>
+</head>
 
-    <div class="form-bloco">
-        <label>Nome</label>
-        <input type="text" id="nome">
+<body>
 
-        <label>Categoria</label>
-        <input type="text" id="categoria">
+<div class="layout">
 
-        <label>Unidade (g, ml, un...)</label>
-        <input type="text" id="unidade">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <h2>ZarioKID 3D</h2>
+        <nav>
+            <ul>
+                <li data-module="producao">Produção</li>
+                <li data-module="estoque">Estoque Central</li>
+                <li data-module="consignacao">Consignação</li>
+                <li data-module="vendas">Vendas</li>
+                <li data-module="vendedores">Vendedores</li>
+                <li data-module="lojas">Lojas</li>
+                <li data-module="catalogo">Catálogo</li>
+                <li data-module="filamentos">Filamentos</li>
+                <li data-module="insumos" class="active">Insumos</li>
+                <li data-module="comissoes">Comissões</li>
+                <li data-module="config">Configurações</li>
+            </ul>
+        </nav>
+    </aside>
 
-        <button id="btnCadastrar">Cadastrar</button>
-    </div>
+    <!-- CONTEÚDO -->
+    <main class="content">
 
-    <h3>Lista de Insumos</h3>
+        <header class="topbar">
+            <div class="topbar-left">
+                <span id="topbar-username">Carregando...</span>
+            </div>
 
-    <table id="tabelaInsumos">
-        <thead>
-            <tr>
-                <th>Nome</th>
-                <th>Categoria</th>
-                <th>Quantidade</th>
-                <th>Unidade</th>
-                <th>Status</th>
-                <th>Ajustar</th>
-            </tr>
-        </thead>
-        <tbody></tbody>
-    </table>
+            <div class="topbar-right">
+                <button id="toggle-theme" class="theme-btn">🌙</button>
 
-    <!-- Modal de ajuste -->
-    <div id="ajusteModal" class="modal hidden">
-        <div class="modal-content">
-            <h3>Ajustar Insumo</h3>
+                <div class="user-menu">
+                    <img id="topbar-avatar" class="avatar" src="../assets/avatar-default.png" alt="avatar">
 
-            <p id="insumoNome"></p>
+                    <div id="dropdown-menu" class="dropdown hidden">
+                        <div class="dropdown-item" id="menu-perfil">Meu Perfil</div>
+                        <div class="dropdown-item" id="menu-config">Configurações</div>
+                        <div class="dropdown-divider"></div>
+                        <div class="dropdown-item logout" id="menu-logout">Sair</div>
+                    </div>
+                </div>
+            </div>
+        </header>
 
-            <label>Quantidade</label>
-            <input type="number" id="ajusteQtd" step="0.01">
+        <h1>INSUMOS</h1>
 
-            <label>Tipo</label>
-            <select id="ajusteTipo">
-                <option value="entrada">Entrada</option>
-                <option value="saida">Saída</option>
-            </select>
+        <div class="insumos-container">
 
-            <label>Motivo</label>
-            <input type="text" id="ajusteMotivo">
+            <h3>Cadastrar Novo Insumo</h3>
 
-            <button id="confirmarAjuste">Confirmar</button>
-            <button onclick="fecharModal()">Cancelar</button>
+            <div class="form-bloco">
+
+                <label>Nome</label>
+                <input type="text" id="nome">
+
+                <label>Categoria</label>
+                <input type="text" id="categoria">
+
+                <label>Quantidade total adquirida</label>
+                <input type="number" id="quantidade_total" step="0.01">
+
+                <label>Preço total da compra</label>
+                <input type="number" id="preco_total" step="0.01">
+
+                <label>Frete pago (opcional)</label>
+                <input type="number" id="frete" step="0.01">
+
+                <label>Juros do parcelamento (opcional)</label>
+                <input type="number" id="juros" step="0.01">
+
+                <button id="btnCadastrar">Cadastrar</button>
+            </div>
+
+            <h3>Lista de Insumos</h3>
+
+            <table id="tabelaInsumos">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Categoria</th>
+                        <th>Qtd Total</th>
+                        <th>Preço Total</th>
+                        <th>Frete</th>
+                        <th>Juros</th>
+                        <th>Custo Unitário</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+
         </div>
-    </div>
+
+    </main>
 
 </div>
 
 <script src="insumos.js"></script>
+
+</body>
+</html>
